@@ -9,6 +9,8 @@
 ## Overview
 **epidsampler** is a package for generating simulated epidemic dataset. Useful for testing sampling methods.
 
+<img src="dev/img/animation.gif" align="center" width="100%" />
+
 ## Installation
 
 ``` r
