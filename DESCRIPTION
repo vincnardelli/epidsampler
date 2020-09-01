@@ -1,0 +1,26 @@
+Package: epidsampler
+Title: epidsampler
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Vincenzo",
+             family = "Nardelli",
+             role = c("cre", "aut"),
+             email = "vincnardelli@gmail.com"),
+      person(given = "Giuseppe",
+             family = "Arbia",
+             role = "aut",
+             email = "giuseppearbia13@gmail.com"))
+Description: An R package that generate simulated epidemic
+    dataset. Useful for testing sampling designs.
+License: LGPL (>= 2.1)
+URL: https://github.com/vincnardelli/epidsampler
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
+Imports: 
+    dplyr,
+    ggplot2,
+    testthat
+Suggests: 
+    covr
