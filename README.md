@@ -12,7 +12,7 @@
 
 This package is in the very early stage of development. It is distributed so users can start to use it and report feedback, but its interface and/or behaviour is likely to change in the future. It is generally best to avoid depending on experimental features.
 
-<img src="../dev/img/animation.gif" align="center" width="100%" />
+<img src="https://raw.githubusercontent.com/vincnardelli/epidsampler/master/dev/img/animation.gif" align="center" width="100%" />
 
 ## Installation
 The package is work in progress and it is not available in the CRAN. However you can install it directly from the github repo.
@@ -49,7 +49,7 @@ map <- map %>%
 #### Evolution of the epidemics
 First of all, in order to simulate an artificial population describing the time evolution of an epidemics, we considered a popular model constituted by a system of six differential equations which, in each moment of time, describe six categories of individuals, namely: the susceptibles (S), those exposed to the virus (E), the infected with symptoms (I), those without symptoms (A) and those that are removed from population either because healed (R) or dead (D).  The figure below describes diagrammatically the transition between the 6 categories. 
 
-<img src="../dev/img/schema.png" align="center" width="80%" />
+<img src="https://raw.githubusercontent.com/vincnardelli/epidsampler/master/dev/img/schema.png" align="center" width="80%" />
 
 
 <a href="articles/epidsampler.html">Find out more on the parameter of the map generation and the simulation in the vignette.</a>
