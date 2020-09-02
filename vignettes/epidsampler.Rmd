@@ -83,6 +83,7 @@ For the data random generation, we assumed that, if infected, a susceptible elem
 The first simulation does not consider asyntomatic in the evolution of the epidemics. 
 
 ```{r message=FALSE, warning=FALSE}
+set.seed(12345)
 map <- map %>%
     addsteps(n=21, m=0.03, s=2,
              cn=4, cp=2,
@@ -98,6 +99,7 @@ plot(map)
 With the parameter **ir** it is possibile to add the Aymptomatics.
 
 ```{r message=FALSE, warning=FALSE}
+set.seed(12345)
 map <- genmap(n=5, p=c(10,50)) %>%
     addsteps(n=21, m=0.03, s=2,
              cn=4, cp=2,
