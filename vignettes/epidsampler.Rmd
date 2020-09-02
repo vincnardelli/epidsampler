@@ -89,7 +89,7 @@ map <- map %>%
              cn=4, cp=2,
              im=3, tE=5, tA=14,
              tI=14, ir=1, cfr=0.15) %>%
-    addsteps(n=19, m=0.01, s=1,
+    addsteps(n=9, m=0.01, s=1,
              cn=1, cp=2,
              im=3, tE=5, tA=14,
              tI=14, ir=1, cfr=0.15)
