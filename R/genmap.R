@@ -1,14 +1,24 @@
 #' Generate map
 #'
-#' @param n grid dimension
-#' @param p uniform distribution of people
-#' @param verbose verbose?
+#' Generate an epidmap object with population distributed into spatial units laid on a n-by-n regular squared lattice grid.
+#'
+#' @param n A positive integer. Grid dimension
+#' @param p A positive integer. People density for each tile - min/max - uniform distribution
+#' @param verbose A logical
 #'
 #' @return An epidmap object
 #' @export
 #'
-#' @examples genmap(n=5, p=c(10, 50))
+#' @details
+#' ##  Map generation
+#' For the map generation we considered a population distributed into spatial units laid on a n-by-n regular squared lattice grid. Each square of the grid contains a number of individuals randomly drawn from a uniform distribution ranging between the two values contained in the vector p. This geographical representation is very general in that the map thus generated can represent, e. g., a city divided into blocks or a region divided into smaller spatial union or any other meaningful geographical partition.
 #'
+#' @examples
+#' \dontrun{
+#'set.seed(12345)
+#'map <- genmap(n=5, p=c(10, 50))
+#' print(map)
+#' }
 genmap <- function(n=5, p=c(10,50), verbose=T){
   # Grid generation
   map <- expand.grid(x=1:n, y=1:n)

@@ -1,9 +1,17 @@
 #' Print epidmap
 #'
-#' @param x an epidmap object
+#' @param x An epidmap object
 #' @param ... others
 #'
 #' @return print
+#'
+#' @examples
+#' \dontrun{
+#' map <- genmap(n=5, p=c(10, 50))
+#' print(map)
+#' }
+#'
+#'
 #' @export
 print.epidmap <- function(x, ...){
   cat("Epidmic generated map \n")

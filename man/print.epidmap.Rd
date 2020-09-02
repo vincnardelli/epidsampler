@@ -7,7 +7,7 @@
 \method{print}{epidmap}(x, ...)
 }
 \arguments{
-\item{x}{an epidmap object}
+\item{x}{An epidmap object}
 
 \item{...}{others}
 }
@@ -16,4 +16,12 @@ print
 }
 \description{
 Print epidmap
+}
+\examples{
+\dontrun{
+map <- genmap(n=5, p=c(10, 50))
+print(map)
+}
+
+
 }

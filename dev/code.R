@@ -1,4 +1,5 @@
 # first example without asyntomatics
+library(magrittr)
 set.seed(12345)
 map <- genmap()
 

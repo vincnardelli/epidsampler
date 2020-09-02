@@ -8,19 +8,26 @@ Authors@R:
              email = "vincnardelli@gmail.com"),
       person(given = "Giuseppe",
              family = "Arbia",
-             role = "aut",
-             email = "giuseppearbia13@gmail.com"))
-Description: An R package that generate simulated epidemic
-    dataset. Useful for testing sampling designs.
+             role = "ctb",
+             email = "giuseppearbia13@gmail.com"),
+      person(given = "Piero Demetrio",
+             family = "Falorsi",
+             role = "ctb"),
+      person(given = "Giorgio",
+             family = "Alleva",
+             role = "ctb"),
+      person(given = "Alberto",
+             family = "Zuliani",
+             role = "ctb"))
+Description: A package for generating simulated epidemic
+    dataset. Useful for testing sampling methods.
 License: LGPL (>= 2.1)
 URL: https://github.com/vincnardelli/epidsampler
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
-Imports: 
-    dplyr,
-    ggplot2,
-    testthat
 Suggests: 
-    covr
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

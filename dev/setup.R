@@ -10,7 +10,11 @@ usethis::use_description(
     Title = "epidsampler",
     `Authors@R` = "c(
     person('Vincenzo', 'Nardelli', email = 'vincnardelli@gmail.com', role = c('cre', 'aut')),
-    person('Giuseppe', 'Arbia', email = 'giuseppearbia13@gmail.com', role = c('aut')))",
+    person('Giuseppe', 'Arbia', email = 'giuseppearbia13@gmail.com', role = c('ctb')),
+    person('Piero Demetrio', 'Falorsi', role = c('ctb')),
+    person('Giorgio', 'Alleva', role = c('ctb')),
+    person('Alberto', 'Zuliani', role = c('ctb'))
+    )",
     Description = "A package for generating simulated epidemic dataset. Useful for testing sampling methods.",
     URL = "https://github.com/vincnardelli/epidsampler"
   )
@@ -34,6 +38,10 @@ usethis::use_git()
 
 usethis::use_travis()
 usethis::use_coverage()
+usethis::use_lifecycle_badge("experimental")
+
+usethis::use_vignette(name="epidsampler")
 
 
-#usethis::use_vignette(name="linear_model_with_gradient_package")
+usethis::use_pkgdown()
+pkgdown::build_site()

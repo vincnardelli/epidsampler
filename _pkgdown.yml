@@ -1,0 +1,27 @@
+template:
+  params:
+    bootswatch: cosmo
+
+development:
+  mode: unreleased
+
+repo:
+  url:
+    home: https://github.com/vincnardelli/epidsampler/
+    source: https://github.com/vincnardelli/epidsampler/blob/master/
+    issue: https://github.com/vincnardelli/epidsampler/issues/
+    user: https://github.com/vincnardelli/
+
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: Home
+    href: index.html
+  - text: Getting started
+    href: articles/epidsampler.html
+  - text: Reference
+    href: reference/index.html
+  - text: Authors
+    href: authors.html
+
