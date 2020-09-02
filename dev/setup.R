@@ -42,6 +42,8 @@ usethis::use_git()
 usethis::use_travis()
 usethis::use_coverage()
 usethis::use_lifecycle_badge("experimental")
+usethis::use_github_action_check_full()
+
 
 usethis::use_vignette(name="epidsampler")
 
