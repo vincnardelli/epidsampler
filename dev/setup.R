@@ -1,10 +1,7 @@
 # setup
 usethis::use_build_ignore("dev")
 
-#usethis::use_package("dplyr")
-#usethis::use_package("ggplot2")
-#usethis::use_package("testthat")
-
+# Description
 usethis::use_description(
   list(
     Title = "epidsampler",
@@ -15,12 +12,18 @@ usethis::use_description(
     person('Giorgio', 'Alleva', role = c('ctb')),
     person('Alberto', 'Zuliani', role = c('ctb'))
     )",
-    Description = "A package for generating simulated epidemic dataset. Useful for testing sampling methods.",
+    Description = "A package simulate an epidemic map with mobility and social interaction between individuals. Useful for testing sampling methods.",
     URL = "https://github.com/vincnardelli/epidsampler"
   )
 )
 usethis::use_lgpl_license( name = "Vincenzo Nardelli" )
 usethis::use_tidy_description()
+
+usethis::use_package("dplyr")
+usethis::use_package("ggplot2")
+usethis::use_package("testthat", "Suggest")
+usethis::use_package("magrittr", "Suggest")
+
 
 usethis::use_readme_md( open = FALSE )
 

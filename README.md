@@ -15,7 +15,7 @@ This package is in the very early stage of development. It is distributed so use
 <img src="../dev/img/animation.gif" align="center" width="100%" />
 
 ## Installation
-The package is work in progress so it is not available in the CRAN. However you can install it directly from the github repo.
+The package is work in progress and it is not available in the CRAN. However you can install it directly from the github repo.
 ``` r
 # The easiest way to get epidsampler is to install it from GitHub:
 # install.packages("devtools")
