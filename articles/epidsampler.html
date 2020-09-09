@@ -82,20 +82,24 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">epidsampler</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/vincnardelli/epidsampler">epidsampler</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">magrittr</span>)
+</pre></div>
 <p>The simulation is divided in two main function. We generate the regular squared lattice grid and the individuals using genmap(). Then, for each day of the simulation (referred as “step”), we simulate the mobility, social interaction and the evolution of the epidemics with the infection and evolution of the disease for each individual in the map.</p>
 <div id="map-generation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#map-generation" class="anchor"></a>Map generation</h1>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">12345</span>)
-<span class="no">map</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/genmap.html">genmap</a></span>(<span class="kw">n</span><span class="kw">=</span><span class="fl">5</span>, <span class="kw">p</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10</span>,<span class="fl">50</span>))
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">12345</span>)
+<span class="kw">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/genmap.html">genmap</a></span>(n=<span class="fl">5</span>, p=<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10</span>,<span class="fl">50</span>))
 <span class="co">#&gt; 1/2: Grid generated</span>
 <span class="co">#&gt; 2/2: People generated</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">map</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">map</span>)
 <span class="co">#&gt; Epidmic generated map </span>
 <span class="co">#&gt; Dimension 5 x 5 </span>
-<span class="co">#&gt; Total 777 people</span></pre></body></html></div>
+<span class="co">#&gt; Total 777 people</span>
+</pre></div>
 <div id="parameters" class="section level4">
 <h4 class="hasAnchor">
 <a href="#parameters" class="anchor"></a>Parameters:</h4>
@@ -183,16 +187,17 @@
 <p>First of all, in order to simulate an artificial population describing the time evolution of an epidemics, we considered a popular model constituted by a system of six differential equations which, in each moment of time, describe six categories of individuals, namely: the susceptibles (S), those exposed to the virus (E), the infected with symptoms (I), those without symptoms (A) and those that are removed from population either because healed (R) or dead (D). This modelling framework is due to the seminal contribution of Hamer (1906), Kermack and McKendrick (1927) and Soper (1929) and it is often referred to as the “SIR model” from the initials of the categories considered in the first simplified formulation: Susceptibles, Infected and Removed. A comprehensive overview of this model is contained in Cliff et al. (1981). See also Vynnycky and White (2010).</p>
 <p>For the data random generation, we assumed that, if infected, a susceptible element of the population (S) will remain in the exposed state (E) for the time <strong>tE</strong>. After that period the subject can become either infected with symptoms (I) with probability <strong>ir</strong> or without (asymptomatic; symbol A) with probability <strong>1-ir</strong>. The asymptomatic will remain infected (and so still able to transmit the virus) for <strong>tA</strong> days. After this period all the asymptomatic will be considered healed and will pass to the category removed (R). In contrast, the infected people showing symptoms will be healed with probability <strong>1-cfr</strong> or die (D) with probability <strong>cfr</strong> (case death rate).</p>
 <p>The first simulation does not consider asyntomatic in the evolution of the epidemics.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">12345</span>)
-<span class="no">map</span> <span class="kw">&lt;-</span> <span class="no">map</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/addsteps.html">addsteps</a></span>(<span class="kw">n</span><span class="kw">=</span><span class="fl">21</span>, <span class="kw">m</span><span class="kw">=</span><span class="fl">0.03</span>, <span class="kw">s</span><span class="kw">=</span><span class="fl">2</span>,
-             <span class="kw">cn</span><span class="kw">=</span><span class="fl">4</span>, <span class="kw">cp</span><span class="kw">=</span><span class="fl">2</span>,
-             <span class="kw">im</span><span class="kw">=</span><span class="fl">3</span>, <span class="kw">tE</span><span class="kw">=</span><span class="fl">5</span>, <span class="kw">tA</span><span class="kw">=</span><span class="fl">14</span>,
-             <span class="kw">tI</span><span class="kw">=</span><span class="fl">14</span>, <span class="kw">ir</span><span class="kw">=</span><span class="fl">1</span>, <span class="kw">cfr</span><span class="kw">=</span><span class="fl">0.15</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/addsteps.html">addsteps</a></span>(<span class="kw">n</span><span class="kw">=</span><span class="fl">9</span>, <span class="kw">m</span><span class="kw">=</span><span class="fl">0.01</span>, <span class="kw">s</span><span class="kw">=</span><span class="fl">1</span>,
-             <span class="kw">cn</span><span class="kw">=</span><span class="fl">1</span>, <span class="kw">cp</span><span class="kw">=</span><span class="fl">2</span>,
-             <span class="kw">im</span><span class="kw">=</span><span class="fl">3</span>, <span class="kw">tE</span><span class="kw">=</span><span class="fl">5</span>, <span class="kw">tA</span><span class="kw">=</span><span class="fl">14</span>,
-             <span class="kw">tI</span><span class="kw">=</span><span class="fl">14</span>, <span class="kw">ir</span><span class="kw">=</span><span class="fl">1</span>, <span class="kw">cfr</span><span class="kw">=</span><span class="fl">0.15</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">12345</span>)
+<span class="kw">map</span> <span class="op">&lt;-</span> <span class="kw">map</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/addsteps.html">addsteps</a></span>(n=<span class="fl">21</span>, m=<span class="fl">0.03</span>, s=<span class="fl">2</span>,
+             cn=<span class="fl">4</span>, cp=<span class="fl">2</span>,
+             im=<span class="fl">3</span>, tE=<span class="fl">5</span>, tA=<span class="fl">14</span>,
+             tI=<span class="fl">14</span>, ir=<span class="fl">1</span>, cfr=<span class="fl">0.15</span>) <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/addsteps.html">addsteps</a></span>(n=<span class="fl">9</span>, m=<span class="fl">0.01</span>, s=<span class="fl">1</span>,
+             cn=<span class="fl">1</span>, cp=<span class="fl">2</span>,
+             im=<span class="fl">3</span>, tE=<span class="fl">5</span>, tA=<span class="fl">14</span>,
+             tI=<span class="fl">14</span>, ir=<span class="fl">1</span>, cfr=<span class="fl">0.15</span>)
 <span class="co">#&gt; Starting simulation in step  0 </span>
 <span class="co">#&gt; Starting simulation in step  1 </span>
 <span class="co">#&gt; Starting simulation in step  2 </span>
@@ -223,19 +228,21 @@
 <span class="co">#&gt; Starting simulation in step  27 </span>
 <span class="co">#&gt; Starting simulation in step  28 </span>
 <span class="co">#&gt; Starting simulation in step  29</span>
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">map</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">map</span>)
+</pre></div>
 <p><img src="epidsampler_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>With the parameter <strong>ir</strong> it is possibile to add the Aymptomatics.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">12345</span>)
-<span class="no">map</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/genmap.html">genmap</a></span>(<span class="kw">n</span><span class="kw">=</span><span class="fl">5</span>, <span class="kw">p</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10</span>,<span class="fl">50</span>)) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/addsteps.html">addsteps</a></span>(<span class="kw">n</span><span class="kw">=</span><span class="fl">21</span>, <span class="kw">m</span><span class="kw">=</span><span class="fl">0.03</span>, <span class="kw">s</span><span class="kw">=</span><span class="fl">2</span>,
-             <span class="kw">cn</span><span class="kw">=</span><span class="fl">4</span>, <span class="kw">cp</span><span class="kw">=</span><span class="fl">2</span>,
-             <span class="kw">im</span><span class="kw">=</span><span class="fl">3</span>, <span class="kw">tE</span><span class="kw">=</span><span class="fl">5</span>, <span class="kw">tA</span><span class="kw">=</span><span class="fl">14</span>,
-             <span class="kw">tI</span><span class="kw">=</span><span class="fl">14</span>, <span class="kw">ir</span><span class="kw">=</span><span class="fl">0.25</span>, <span class="kw">cfr</span><span class="kw">=</span><span class="fl">0.15</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/addsteps.html">addsteps</a></span>(<span class="kw">n</span><span class="kw">=</span><span class="fl">7</span>, <span class="kw">m</span><span class="kw">=</span><span class="fl">0.01</span>, <span class="kw">s</span><span class="kw">=</span><span class="fl">1</span>,
-             <span class="kw">cn</span><span class="kw">=</span><span class="fl">1</span>, <span class="kw">cp</span><span class="kw">=</span><span class="fl">2</span>,
-             <span class="kw">im</span><span class="kw">=</span><span class="fl">3</span>, <span class="kw">tE</span><span class="kw">=</span><span class="fl">5</span>, <span class="kw">tA</span><span class="kw">=</span><span class="fl">14</span>,
-             <span class="kw">tI</span><span class="kw">=</span><span class="fl">14</span>, <span class="kw">ir</span><span class="kw">=</span><span class="fl">0.25</span>, <span class="kw">cfr</span><span class="kw">=</span><span class="fl">0.15</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">12345</span>)
+<span class="kw">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/genmap.html">genmap</a></span>(n=<span class="fl">5</span>, p=<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10</span>,<span class="fl">50</span>)) <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/addsteps.html">addsteps</a></span>(n=<span class="fl">21</span>, m=<span class="fl">0.03</span>, s=<span class="fl">2</span>,
+             cn=<span class="fl">4</span>, cp=<span class="fl">2</span>,
+             im=<span class="fl">3</span>, tE=<span class="fl">5</span>, tA=<span class="fl">14</span>,
+             tI=<span class="fl">14</span>, ir=<span class="fl">0.25</span>, cfr=<span class="fl">0.15</span>) <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/addsteps.html">addsteps</a></span>(n=<span class="fl">7</span>, m=<span class="fl">0.01</span>, s=<span class="fl">1</span>,
+             cn=<span class="fl">1</span>, cp=<span class="fl">2</span>,
+             im=<span class="fl">3</span>, tE=<span class="fl">5</span>, tA=<span class="fl">14</span>,
+             tI=<span class="fl">14</span>, ir=<span class="fl">0.25</span>, cfr=<span class="fl">0.15</span>)
 <span class="co">#&gt; 1/2: Grid generated</span>
 <span class="co">#&gt; 2/2: People generated</span>
 <span class="co">#&gt; Starting simulation in step  0 </span>
@@ -266,7 +273,8 @@
 <span class="co">#&gt; Starting simulation in step  25 </span>
 <span class="co">#&gt; Starting simulation in step  26 </span>
 <span class="co">#&gt; Starting simulation in step  27</span>
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">map</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">map</span>)
+</pre></div>
 <p><img src="epidsampler_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
 </div>
@@ -288,7 +296,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

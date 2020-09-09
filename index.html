@@ -87,9 +87,11 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The package is work in progress and it is not available in the CRAN. However you can install it directly from the github repo.</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># The easiest way to get epidsampler is to install it from GitHub:</span>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># The easiest way to get epidsampler is to install it from GitHub:</span>
 <span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"vincnardelli/epidsampler"</span>)</pre></div>
+<span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"vincnardelli/epidsampler"</span>)
+</pre></div>
 </div>
 <div id="how-to-use" class="section level2">
 <h2 class="hasAnchor">
@@ -98,21 +100,25 @@
 <div id="map-generation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#map-generation" class="anchor"></a>Map generation</h3>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="no">map</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/genmap.html">genmap</a></span>(<span class="kw">n</span><span class="kw">=</span><span class="fl">5</span>, <span class="kw">p</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">80</span>, <span class="fl">100</span>))</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/genmap.html">genmap</a></span>(n=<span class="fl">5</span>, p=<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">80</span>, <span class="fl">100</span>))
+</pre></div>
 <p><a href="articles/epidsampler.html">Find out more on the parameter of genmap() in the vignette.</a></p>
 </div>
 <div id="simulation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#simulation" class="anchor"></a>Simulation</h3>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="no">map</span> <span class="kw">&lt;-</span> <span class="no">map</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="reference/addsteps.html">addsteps</a></span>(<span class="kw">n</span><span class="kw">=</span><span class="fl">21</span>, <span class="kw">m</span><span class="kw">=</span><span class="fl">0.03</span>, <span class="kw">s</span><span class="kw">=</span><span class="fl">2</span>,
-             <span class="kw">cn</span><span class="kw">=</span><span class="fl">4</span>, <span class="kw">cp</span><span class="kw">=</span><span class="fl">2</span>,
-             <span class="kw">im</span><span class="kw">=</span><span class="fl">3</span>, <span class="kw">tE</span><span class="kw">=</span><span class="fl">5</span>, <span class="kw">tA</span><span class="kw">=</span><span class="fl">14</span>,
-             <span class="kw">tI</span><span class="kw">=</span><span class="fl">14</span>, <span class="kw">ir</span><span class="kw">=</span><span class="fl">1</span>, <span class="kw">cfr</span><span class="kw">=</span><span class="fl">0.15</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="reference/addsteps.html">addsteps</a></span>(<span class="kw">n</span><span class="kw">=</span><span class="fl">19</span>, <span class="kw">m</span><span class="kw">=</span><span class="fl">0.01</span>, <span class="kw">s</span><span class="kw">=</span><span class="fl">1</span>,
-             <span class="kw">cn</span><span class="kw">=</span><span class="fl">1</span>, <span class="kw">cp</span><span class="kw">=</span><span class="fl">2</span>,
-             <span class="kw">im</span><span class="kw">=</span><span class="fl">3</span>, <span class="kw">tE</span><span class="kw">=</span><span class="fl">5</span>, <span class="kw">tA</span><span class="kw">=</span><span class="fl">14</span>,
-             <span class="kw">tI</span><span class="kw">=</span><span class="fl">14</span>, <span class="kw">ir</span><span class="kw">=</span><span class="fl">1</span>, <span class="kw">cfr</span><span class="kw">=</span><span class="fl">0.15</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">map</span> <span class="op">&lt;-</span> <span class="kw">map</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="reference/addsteps.html">addsteps</a></span>(n=<span class="fl">21</span>, m=<span class="fl">0.03</span>, s=<span class="fl">2</span>,
+             cn=<span class="fl">4</span>, cp=<span class="fl">2</span>,
+             im=<span class="fl">3</span>, tE=<span class="fl">5</span>, tA=<span class="fl">14</span>,
+             tI=<span class="fl">14</span>, ir=<span class="fl">1</span>, cfr=<span class="fl">0.15</span>) <span class="op">%&gt;%</span>
+    <span class="fu"><a href="reference/addsteps.html">addsteps</a></span>(n=<span class="fl">19</span>, m=<span class="fl">0.01</span>, s=<span class="fl">1</span>,
+             cn=<span class="fl">1</span>, cp=<span class="fl">2</span>,
+             im=<span class="fl">3</span>, tE=<span class="fl">5</span>, tA=<span class="fl">14</span>,
+             tI=<span class="fl">14</span>, ir=<span class="fl">1</span>, cfr=<span class="fl">0.15</span>)
+</pre></div>
 <p><a href="articles/epidsampler.html">Find out more on the parameter of addsteps() in the vignette.</a></p>
 <div id="evolution-of-the-epidemics" class="section level4">
 <h4 class="hasAnchor">
@@ -127,9 +133,9 @@
 <h2 class="hasAnchor">
 <a href="#authors-and-contributors" class="anchor"></a>Authors and contributors</h2>
 <p><strong>Vincenzo Nardelli</strong> Bicocca University, Milan - <a href="mailto:vincnardelli@gmail.com" class="email">vincnardelli@gmail.com</a></p>
+<p><strong>Giorgio Alleva</strong> - Sapienza University of Rome</p>
 <p><strong>Giuseppe Arbia</strong> - Catholic University of the Sacred Heart, Milan</p>
 <p><strong>Piero Demetrio Falorsi</strong> - Former Director of Methodology at Istat and International Consultant</p>
-<p><strong>Giorgio Alleva</strong> - Sapienza University of Rome</p>
 <p><strong>Alberto Zuliani</strong> - Emeritus Professor, Sapienza University of Rome</p>
 </div>
 </div>
@@ -175,7 +181,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
