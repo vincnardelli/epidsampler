@@ -58,11 +58,11 @@ First of all, in order to simulate an artificial population describing the time 
 ## Authors and contributors
 **Vincenzo Nardelli** Bicocca University, Milan - vincnardelli@gmail.com
 
+**Giorgio Alleva** - Sapienza University of Rome
+
 **Giuseppe Arbia** - Catholic University of the Sacred Heart, Milan
 
 **Piero Demetrio Falorsi** - Former Director of Methodology at Istat and International Consultant
-
-**Giorgio Alleva** - Sapienza University of Rome
 
 **Alberto Zuliani** - Emeritus Professor, Sapienza University of Rome
 

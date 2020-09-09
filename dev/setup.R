@@ -7,9 +7,9 @@ usethis::use_description(
     Title = "epidsampler",
     `Authors@R` = "c(
     person('Vincenzo', 'Nardelli', email = 'vincnardelli@gmail.com', role = c('cre', 'aut')),
+    person('Giorgio', 'Alleva', role = c('ctb')),
     person('Giuseppe', 'Arbia', email = 'giuseppearbia13@gmail.com', role = c('ctb')),
     person('Piero Demetrio', 'Falorsi', role = c('ctb')),
-    person('Giorgio', 'Alleva', role = c('ctb')),
     person('Alberto', 'Zuliani', role = c('ctb'))
     )",
     Description = "A package simulate an epidemic map with mobility and social interaction between individuals. Useful for testing sampling methods.",
@@ -21,8 +21,10 @@ usethis::use_tidy_description()
 
 usethis::use_package("dplyr")
 usethis::use_package("ggplot2")
+usethis::use_package("spdep")
 usethis::use_package("testthat", "Suggest")
 usethis::use_package("magrittr", "Suggest")
+usethis::use_package("utils", "Suggest")
 
 
 usethis::use_readme_md( open = FALSE )
