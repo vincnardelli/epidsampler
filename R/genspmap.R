@@ -41,11 +41,13 @@ genspmap <- function(n=5, P=1000, p=1, rho=0, verbose=T){
   map$p[1] <- map$p[1] + P - sum(map$p)
 
 
-  data <- data.frame(id=1:1000,
+  data <- data.frame(id=1:P,
                      x=rep(map$x, map$p),
                      y=rep(map$y, map$p),
                      condition = "S",
                      t = 0)
+  data$condition <- as.character(data$condition)
+  data$condition[sample(nrow(data), 10)] <- "E"
 
   # Init contacts
   contacts <- list()
