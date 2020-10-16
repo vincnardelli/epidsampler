@@ -120,20 +120,20 @@
     <p>Simulate one step (i.e. one day) of mobility, social interaction and the evolution of the epidemics with the infection and evolution of the disease for each individual in the map.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>addstep</span>(
-  map = <span class='kw'>map</span>,
-  m = <span class='kw'>NULL</span>,
-  s = <span class='kw'>NULL</span>,
-  cn = <span class='kw'>NULL</span>,
-  cp = <span class='kw'>NULL</span>,
-  im = <span class='kw'>NULL</span>,
-  tE = <span class='kw'>NULL</span>,
-  tI = <span class='kw'>NULL</span>,
-  tA = <span class='kw'>NULL</span>,
-  ir = <span class='kw'>NULL</span>,
-  cfr = <span class='kw'>NULL</span>,
-  verbose = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>addstep</span><span class='op'>(</span>
+  map <span class='op'>=</span> <span class='va'>map</span>,
+  m <span class='op'>=</span> <span class='cn'>NULL</span>,
+  s <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cn <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cp <span class='op'>=</span> <span class='cn'>NULL</span>,
+  im <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tE <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tI <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tA <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ir <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cfr <span class='op'>=</span> <span class='cn'>NULL</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -212,15 +212,15 @@ For the data random generation, we assumed that, if infected, a susceptible elem
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>12345</span>)
-<span class='kw'>map</span> <span class='op'>&lt;-</span> <span class='fu'><a href='genmap.html'>genmap</a></span>(n=<span class='fl'>5</span>, p=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>50</span>))
-<span class='kw'>map</span> <span class='op'>&lt;-</span> <span class='kw'>map</span> <span class='op'>%&gt;%</span>
- <span class='fu'>addstep</span>(m=<span class='fl'>0.03</span>, s=<span class='fl'>2</span>,
-          cn=<span class='fl'>4</span>, cp=<span class='fl'>2</span>,
-          im=<span class='fl'>3</span>, tE=<span class='fl'>5</span>, tA=<span class='fl'>14</span>,
-          tI=<span class='fl'>14</span>, ir=<span class='fl'>1</span>, cfr=<span class='fl'>0.15</span>)
-}
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>12345</span><span class='op'>)</span>
+<span class='va'>map</span> <span class='op'>&lt;-</span> <span class='fu'><a href='genmap.html'>genmap</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>5</span>, p<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>map</span> <span class='op'>&lt;-</span> <span class='va'>map</span> <span class='op'>%&gt;%</span>
+ <span class='fu'>addstep</span><span class='op'>(</span>m<span class='op'>=</span><span class='fl'>0.03</span>, s<span class='op'>=</span><span class='fl'>2</span>,
+          cn<span class='op'>=</span><span class='fl'>4</span>, cp<span class='op'>=</span><span class='fl'>2</span>,
+          im<span class='op'>=</span><span class='fl'>3</span>, tE<span class='op'>=</span><span class='fl'>5</span>, tA<span class='op'>=</span><span class='fl'>14</span>,
+          tI<span class='op'>=</span><span class='fl'>14</span>, ir<span class='op'>=</span><span class='fl'>1</span>, cfr<span class='op'>=</span><span class='fl'>0.15</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -237,7 +237,7 @@ For the data random generation, we assumed that, if infected, a susceptible elem
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
