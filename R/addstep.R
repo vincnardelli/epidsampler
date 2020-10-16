@@ -191,7 +191,7 @@ addstep <- function(map=map, m=NULL, s=NULL,
   }
   # finish I
   # meet
-  possible_meet <- possibly(meet, otherwise = NULL)
+  possible_meet <- purrr::possibly(meet, otherwise = NULL)
   list <- purrr::map(cns, possible_meet, t=t, cp=cp)
 
   # plan("multicore")
