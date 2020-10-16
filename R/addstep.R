@@ -56,41 +56,89 @@ addstep <- function(map=map, m=NULL, s=NULL,
   if(!is.null(map$par$ir) & is.null(ir)) ir <- map$par$ir
   if(!is.null(map$par$cfr) & is.null(cfr)) cfr <- map$par$cfr
 
-  cat("Starting simulation in step ", map$par$t, "\n")
-  lastmap <- map$data[map$data$t == map$par$t,]
-
-  # move section
-
-  can_move <- lastmap$id[lastmap$condition %in% c("S", "E", "A")]
-  n_can_move <- round(length(can_move)*m, 0)
+  t <-map$par$t + 1
+  map$par$t <- t
 
 
 
-  move_p <- sample(can_move, n_can_move)
+  move <- function(map, m, s){
+    lastmap <- map$data[map$data$t == t-1, ]
+    can_move <- lastmap$id[lastmap$condition %in% c("S", "E", "A")]
+    n_can_move <- round(length(can_move)*m, 0)
 
-  move_x <- round(runif(n_can_move, min=-s, max=s), 0)
-  move_y <- round(runif(n_can_move, min=-s, max=s), 0)
 
-  check_border <- function(list){
-    list[list < 1] <- 1 - list[list < 1]
-    list[list > n] <- n - (list[list > n] - n)
-    list[list < 1] <- 1
-    list[list > n] <- n
+    move_p <- sample(can_move, n_can_move)
 
-    return(list)
+    move_x <- round(runif(n_can_move, min=-s, max=s), 0)
+    move_y <- round(runif(n_can_move, min=-s, max=s), 0)
+
+    check_border <- function(list){
+      list[list < 1] <- 1 - list[list < 1]
+      list[list > n] <- n - (list[list > n] - n)
+      list[list < 1] <- 1
+      list[list > n] <- n
+
+      return(list)
+    }
+
+    new_x <- check_border(lastmap[move_p, ]$x + move_x)
+    new_y <- check_border(lastmap[move_p, ]$y + move_y)
+
+    #t <- map$par$t+1
+    lastmap$t <- t
+    lastmap[move_p,]$x <- new_x
+    lastmap[move_p,]$y <- new_y
+
+    return(lastmap)
   }
 
-  new_x <- check_border(lastmap[move_p, ]$x + move_x)
-  new_y <- check_border(lastmap[move_p, ]$y + move_y)
+  meet <- function(t, cell, cp){
+    #contact in one cell
 
-  data_new <- lastmap
-  t <- map$par$t+1
-  data_new$t <- t
-  data_new[move_p,]$x <- new_x
-  data_new[move_p,]$y <- new_y
-  map$data <- rbind(map$data, data_new)
+    #cell to xy
+    x <- map$map[cell,]$x
+    y <- map$map[cell, ]$y
 
-  #end move section
+
+    cell_data <- map$data[map$data$x == x & map$data$y ==y  & map$data$t == t & map$data$condition %in% c("S", "E", "A", "R"),]
+    n_people_contact <- rpois(1, cp)
+
+    if(nrow(cell_data) > n_people_contact & nrow(cell_data) > 1){
+      sampled <- sample(cell_data$id, n_people_contact)
+
+      contact <- expand.grid(t=t,
+                             p1=sampled,
+                             p2=sampled)
+      contact$c1 <- sapply(contact$p1, function(k) cell_data[cell_data$id == k, ]$condition)
+      contact$c2 <- sapply(contact$p2, function(k) cell_data[cell_data$id == k, ]$condition)
+
+      contact <- contact[contact$p1!=contact$p2,]
+
+      if(nrow(contact) > 0){
+
+        # contagion
+        contact$new <- FALSE
+
+        condition <- sapply(sampled, function(k) cell_data[cell_data$id == k, ]$condition)
+        if(sum(c("E", "A") %in% condition)!=0 & length(sampled[condition == "S"])>0){
+          if(length(sampled[condition == "S"])==1){
+            new_exposed <- sampled[condition == "S"]
+          }else{
+            new_exposed <- sample(sampled[condition == "S"], im)
+          }
+
+          contact[contact$p1 %in% new_exposed, ]$new <- TRUE
+
+        }
+      }
+
+
+      return(contact)
+    }else{
+      return(NULL)
+    }
+
+  }
 
   check_stationary_status <- function(vector, t){
     if(length(vector)< t) return(FALSE)
@@ -99,6 +147,16 @@ addstep <- function(map=map, m=NULL, s=NULL,
     last_element <- vector[length(vector)]
     return(mean(vector == rep(last_element, length(vector))) == 1)
   }
+
+
+  cat("simulating t", t, "\n")
+  # number of meeting for each cell
+  # TODO cn depends on population
+  cns <- rep(1:nrow(map$map), rpois(nrow(map$map), cn))
+  # structure
+  # move
+  map$data <- rbind(map$data, move(map, 0.05, 3))
+  # update
 
   # change status
   # if E
@@ -132,68 +190,18 @@ addstep <- function(map=map, m=NULL, s=NULL,
     }
   }
   # finish I
+  # meet
+  possible_meet <- purrr::possibly(meet, otherwise = NULL)
+  list <- purrr::map(cns, possible_meet, t=t, cp=cp)
+
+  # plan("multicore")
+  # list <- furrr::future_map(cns, possible_meet, t=t, cp=cp)
 
 
-
-  # contact section
-  active_cat <- c("S", "E", "A")
-  # cat("Contacts\n")
-
-  for(i_map in 1:nrow(map$map)){
-    candidates <- data_new$id[data_new$x == map$map$x[i_map] & data_new$y ==map$map$y[i_map] & data_new$condition %in% active_cat]
-
-    number_contacts <- rpois(1, cn)
-
-    if(number_contacts > 0){
-      #  cat("  Tile ", i_map, "- generated", number_contacts, "contacts \n")
-
-      for(c in 1:number_contacts){
-
-        n_people_contact <- rpois(1, cp)
-
-        # FIXME add error in contacts
-        #if(n_people_contact >= candidates) stop("Number of contacts higher than people in tile. Please reduce the parameter np or use a new map with more people!")
-
-        sample <- sample(candidates, n_people_contact)
-
-        #infection
-
-        infected <- map$data[map$data$id %in% sample & map$data$condition %in% c("E", "A", "I") & map$data$t == max(map$data$t), ]$id
-
-        if(length(infected)>0){
-          if(verbose) cat("Infected found ", infected, "\n")
-          if(verbose) cat("Sample ", sample, "\n")
-          not_infected <- sample[!(sample %in% infected)]
-          if(verbose) cat("not_infected ", not_infected, "\n")
-
-          number_new_infected <- rpois(1, im)
-          number_new_infected <- ifelse(number_new_infected < length(not_infected), number_new_infected, length(not_infected))
-
-          if(number_new_infected > 0){
-            new_infected <- sample(not_infected, number_new_infected)
-            if(verbose) cat("new_infected ", new_infected, "\n")
-            map$data[map$data$id %in% new_infected & map$data$t == t, ]$condition <- "E"
-          }
-
-        }
-
-        if(length(sample > 1)){
-          for(i in sample){
-            to_add <- sample[-which(sample == i)]
-
-            if(length(map$contacts[[i]]) == t){
-              map$contacts[[i]][[t]] <- append(map$contacts[[i]][[t]], setdiff(to_add, map$contacts[[i]][[t]]))
-            }else{
-              map$contacts[[i]][[t]] <- c(to_add)
-            }
-          }
-        }
-      }
-    }
-  }
-
-  #end contact section
-
+  meetdf <- purrr::reduce(list, rbind)
+  map$contacts <- rbind(map$contacts, meetdf)
+  new_exposed <- unique(meetdf[meetdf$new,]$p1)
+  if(length(new_exposed) > 0) map$data[map$data$t == t & map$data$id %in% new_exposed,]$condition <- "E"
 
   map$par$m <- m
   map$par$s <- s
@@ -208,3 +216,6 @@ addstep <- function(map=map, m=NULL, s=NULL,
   map$par$cfr <- cfr
   return(map)
 }
+
+
+
