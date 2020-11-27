@@ -86,10 +86,10 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The package is work in progress and it is not available in the CRAN. However you can install it directly from the github repo.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># The easiest way to get epidsampler is to install it from GitHub:</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># The easiest way to get epidsampler is to install it from GitHub:</span>
 <span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"vincnardelli/epidsampler"</span><span class="op">)</span></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"vincnardelli/epidsampler"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="how-to-use" class="section level2">
 <h2 class="hasAnchor">
@@ -98,15 +98,15 @@
 <div id="map-generation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#map-generation" class="anchor"></a>Map generation</h3>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/genmap.html">genmap</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">5</span>, p<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">80</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/genmap.html">genmap</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">5</span>, p<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">80</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><a href="articles/epidsampler.html">Find out more on the parameter of genmap() in the vignette.</a></p>
 </div>
 <div id="simulation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#simulation" class="anchor"></a>Simulation</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">map</span> <span class="op">&lt;-</span> <span class="va">map</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">map</span> <span class="op">&lt;-</span> <span class="va">map</span> <span class="op">%&gt;%</span>
     <span class="fu"><a href="reference/addsteps.html">addsteps</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">21</span>, m<span class="op">=</span><span class="fl">0.03</span>, s<span class="op">=</span><span class="fl">2</span>,
              cn<span class="op">=</span><span class="fl">4</span>, cp<span class="op">=</span><span class="fl">2</span>,
              im<span class="op">=</span><span class="fl">3</span>, tE<span class="op">=</span><span class="fl">5</span>, tA<span class="op">=</span><span class="fl">14</span>,
@@ -114,7 +114,7 @@
     <span class="fu"><a href="reference/addsteps.html">addsteps</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">19</span>, m<span class="op">=</span><span class="fl">0.01</span>, s<span class="op">=</span><span class="fl">1</span>,
              cn<span class="op">=</span><span class="fl">1</span>, cp<span class="op">=</span><span class="fl">2</span>,
              im<span class="op">=</span><span class="fl">3</span>, tE<span class="op">=</span><span class="fl">5</span>, tA<span class="op">=</span><span class="fl">14</span>,
-             tI<span class="op">=</span><span class="fl">14</span>, ir<span class="op">=</span><span class="fl">1</span>, cfr<span class="op">=</span><span class="fl">0.15</span><span class="op">)</span></pre></div>
+             tI<span class="op">=</span><span class="fl">14</span>, ir<span class="op">=</span><span class="fl">1</span>, cfr<span class="op">=</span><span class="fl">0.15</span><span class="op">)</span></code></pre></div>
 <p><a href="articles/epidsampler.html">Find out more on the parameter of addsteps() in the vignette.</a></p>
 <div id="evolution-of-the-epidemics" class="section level4">
 <h4 class="hasAnchor">
