@@ -31,10 +31,10 @@ Imports:
     dplyr,
     ggplot2,
     spdep,
-    purrr
+    purrr,
+    magrittr
 Suggests: 
     testthat,
-    magrittr,
     utils,
     knitr,
     rmarkdown
