@@ -31,5 +31,20 @@ move_uniform <- function(map, m, s){
   map$data[map$data$t == map$par$t, ][move_p,]$x <- check_border(map$data[map$data$t == map$par$t, ][move_p, ]$x + move_x)
   map$data[map$data$t == map$par$t, ][move_p,]$y <- check_border(map$data[map$data$t == map$par$t, ][move_p, ]$y + move_y)
 
+  if(map$par$save_movements){
+    df_tosave <- map$data[map$data$t == map$par$t, ]
+    if(is.null(map$movements)){
+      df_tosave$t_move <- 1
+    }else{
+      if(dim(map$movements[map$movements$t == map$par$t, ])[1]>0){
+        df_tosave$t_move <- max(map$movements$t_move[map$movements$t == map$par$t]) + 1
+      }else{
+        df_tosave$t_move <- 1
+      }
+    }
+
+    map$movements <- rbind(map$movements, df_tosave)
+  }
+
   return(map)
 }

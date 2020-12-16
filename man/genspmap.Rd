@@ -4,7 +4,7 @@
 \alias{genspmap}
 \title{Generate map}
 \usage{
-genspmap(n = 5, P = 1000, p = 1, rho = 0, verbose = T)
+genspmap(n = 5, P = 1000, p = 1, rho = 0, verbose = T, save_movements = F)
 }
 \arguments{
 \item{n}{A positive integer. Grid dimension}

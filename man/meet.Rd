@@ -4,7 +4,7 @@
 \alias{meet}
 \title{Meet}
 \usage{
-meet(map, cn, cp, im)
+meet(map, cn, cp, im, parallel = F)
 }
 \arguments{
 \item{map}{a map object}

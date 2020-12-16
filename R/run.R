@@ -16,14 +16,20 @@
 #' @examples
 run <- function(map, daily, days=1, tE=5, tA=14, tI=14, ir=1, cfr=0.15, verbose = F){
 
+
+  pb <- progress::progress_bar$new(
+    format = "  simulation [:bar] :percent eta: :elapsedfull - :eta",
+    total = days, clear = TRUE)
+
+
   for(day in 1:days){
+    pb$tick()
 
     # 1 aggiungo un giorno
     duplicate <- map$data[map$data$t == map$par$t, ]
     duplicate$t <- map$par$t + 1
     map$par$t <- map$par$t+1
     map$data <- rbind(map$data, duplicate)
-    cat("Day ", map$par$t, "\n")
 
     # 2 eseguo le funzioni
     map <- daily(map)
@@ -70,5 +76,6 @@ run <- function(map, daily, days=1, tE=5, tA=14, tI=14, ir=1, cfr=0.15, verbose 
     }
     # finish I
   }
+  cat("Simulation done! \n")
   return(map)
 }

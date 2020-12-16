@@ -20,6 +20,7 @@ usethis::use_lgpl_license( name = "Vincenzo Nardelli" )
 usethis::use_tidy_description()
 
 usethis::use_package("magrittr")
+usethis::use_pipe(export = TRUE)
 usethis::use_package("dplyr")
 usethis::use_package("ggplot2")
 usethis::use_package("spdep")
