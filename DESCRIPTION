@@ -32,7 +32,10 @@ Imports:
     ggplot2,
     spdep,
     purrr,
-    magrittr
+    magrittr,
+    parallel,
+    progress,
+    gganimate
 Suggests: 
     testthat,
     utils,

@@ -11,7 +11,8 @@ animate_map(
   res = 150,
   fps = 10,
   spd = 2,
-  end_pause = 30
+  end_pause = 30,
+  renderer = gganimate::gifski_renderer()
 )
 }
 \arguments{

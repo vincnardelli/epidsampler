@@ -14,7 +14,8 @@
 #' @examples
 animate_map <- function(map, height=800, width=800,
                         res = 150, fps = 10, spd = 2,
-                        end_pause = 30){
+                        end_pause = 30,
+                        renderer = gganimate::gifski_renderer() ){
   # create continuous time with movements during day
   incr <- map$movements %>%
     dplyr::group_by(t) %>%
@@ -44,7 +45,7 @@ animate_map <- function(map, height=800, width=800,
                                   height = height,
                                   width =width,
                                   res = res,
-                                  nframes=map$par$t*fps*spd, fps=fps, renderer = gganimate::gifski_renderer())
+                                  nframes=map$par$t*fps*spd, fps=fps, renderer = renderer)
 
   return(anim_plot)
 }
