@@ -5,9 +5,9 @@ library(tictoc)
 set.seed(12345)
 map <- genspmap(n=20, P=20000, save_movements=T)
 
-# tic()
-# meet(map, cn=4, cp=3, im=2, parallel=F)
-# toc()
+tic()
+meet(map, cn=4, cp=3, im=2, parallel=F)
+toc()
 
 
 tic()
@@ -16,7 +16,8 @@ toc()
 
 bench::mark(meet(map, cn=4, cp=3, im=2, parallel=F),
             meet(map, cn=4, cp=3, im=2, parallel=T),
-            check=F)
+            check=F,
+            memory=F)
 
 
 phase1 <- . %>%

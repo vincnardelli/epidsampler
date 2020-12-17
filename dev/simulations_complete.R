@@ -5,12 +5,12 @@ library(tictoc)
 
 phase1 <- . %>%
   move_uniform(m=0.05, s=15) %>%
-  meet(cn=5, cp=5, im=2) %>%
+  meet(cn=5, cp=5, im=2, parallel = T) %>%
   move_back()
 
 phase2 <- . %>%
   move_uniform(m=0.01, s=2) %>%
-  meet(cn=2, cp=3, im=1) %>%
+  meet(cn=2, cp=3, im=1, parallel = T) %>%
   move_back()
 
 

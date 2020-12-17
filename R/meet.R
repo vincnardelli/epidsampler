@@ -70,7 +70,7 @@ meet <- function(map, cn, cp, im, parallel=F){
   if(parallel){
     # future::plan(future::multisession)
     # list <- furrr::future_map(cns, possible_meet, cp=cp)
-    list <- parallel::mclapply(cns, possible_meet, cp=cp)
+    list <- parallel::mclapply(cns, possible_meet, cp=cp, mc.cores = parallel::detectCores()-1)
   }else{
     list <- purrr::map(cns, possible_meet, cp=cp)
   }
