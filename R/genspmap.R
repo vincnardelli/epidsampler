@@ -23,12 +23,12 @@
 #' }
 #' @importFrom spdep cell2nb nb2mat
 
-genspmap <- function(n=5, P=1000, p=1, rho=0, verbose=T){
+genspmap <- function(n=5, P=1000, p=1, rho=0, verbose=T, save_movements=F){
 
   # Generate grid
-  nb <- cell2nb(n, n)
+  nb <- spdep::cell2nb(n, n)
   map <-  expand.grid(x=1:n, y=1:n)
-  w <- nb2mat(nb)
+  w <- spdep::nb2mat(nb)
   I<-diag(n*n)
 
 
@@ -58,10 +58,11 @@ genspmap <- function(n=5, P=1000, p=1, rho=0, verbose=T){
              p=p,
              P=P,
              rho=rho,
-             t=0)
+             t=0,
+             save_movements = save_movements)
 
 
-  out <- list(map=map, data=data, contacts=contacts, par=par)
+  out <- list(map=map, data=data, contacts=contacts, movements=NULL, par=par)
   class(out) <- "epidmap"
   return(out)
 

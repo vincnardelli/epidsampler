@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-meet <- function(map, cn, cp, im){
+meet <- function(map, cn, cp, im, parallel=F){
 
   cellmeet <- function(cell, cp){
     #contact in one cell
@@ -66,11 +66,15 @@ meet <- function(map, cn, cp, im){
 
   possible_meet <- purrr::possibly(cellmeet, otherwise = NULL)
 
-  list <- purrr::map(cns, possible_meet, cp=cp)
-
   # TODO parallel integration
-  #future::plan(future::multisession)
-  #list <- furrr::future_map(cns, possible_meet, cp=cp)
+  if(parallel){
+    # future::plan(future::multisession)
+    # list <- furrr::future_map(cns, possible_meet, cp=cp)
+    list <- parallel::mclapply(cns, possible_meet, cp=cp)
+  }else{
+    list <- purrr::map(cns, possible_meet, cp=cp)
+  }
+
 
 
   meetdf <- purrr::reduce(list, rbind)
