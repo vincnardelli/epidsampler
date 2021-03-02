@@ -2,7 +2,7 @@
 # epidsampler
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/vincnardelli/epidsampler.svg?branch=master)](https://travis-ci.com/vincnardelli/epidsampler)
+[![GitHub build status](https://github.com/vincnardelli/epidsampler/workflows/R-CMD-check/badge.svg)](https://github.com/vincnardelli/epidsampler/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/vincnardelli/epidsampler/branch/master/graph/badge.svg)](https://codecov.io/gh/vincnardelli/epidsampler?branch=master)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![arXiv](https://img.shields.io/badge/arXiv-2004.06068-b31b1b.svg)](https://arxiv.org/abs/2004.06068)
