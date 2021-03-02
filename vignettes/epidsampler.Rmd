@@ -18,7 +18,6 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(epidsampler)
-library(magrittr)
 ```
 
 The simulation is divided in two main function. We generate the regular squared lattice grid and the individuals using genmap(). Then, for each day of the simulation (referred as "step"), we simulate the mobility, social interaction and the evolution of the epidemics with the infection and evolution of the disease for each individual in the map.
@@ -26,7 +25,7 @@ The simulation is divided in two main function. We generate the regular squared 
 # Map generation
 ```{r}
 set.seed(12345)
-map <- genmap(n=5, p=c(10,50))
+map <- generate(n=5, P=1000)
 print(map)
 ```
 #### Parameters:
@@ -83,31 +82,26 @@ For the data random generation, we assumed that, if infected, a susceptible elem
 The first simulation does not consider asyntomatic in the evolution of the epidemics. 
 
 ```{r message=FALSE, warning=FALSE}
-map <- map %>%
-    addsteps(n=21, m=0.1, s=2,
-             cn=6, cp=5,
-             im=3, tE=5, tA=14,
-             tI=14, ir=1, cfr=0.15) %>%
-    addsteps(n=9, m=0.01, s=1,
-             cn=1, cp=2,
-             im=3, tE=5, tA=14,
-             tI=14, ir=1, cfr=0.15)
-plot(map)
+phase1 <- . %>%
+  move_uniform(m=0.2, s=3) %>%
+  meet(cn=3, cp=4, im=2) %>%
+  move_back()
+
+map <- run(map, phase1, days = 21, tE=5, tA=14,
+            tI=14, ir=1, cfr=0.15)
+
 ```
 
-With the parameter **ir** it is possibile to add the Aymptomatics.
+And add different parameters for the second phase.
 
 ```{r message=FALSE, warning=FALSE}
-map <- genmap(n=5, p=c(10,50)) %>%
-    addsteps(n=21, m=0.1, s=2,
-             cn=6, cp=5,
-             im=3, tE=5, tA=14,
-             tI=14, ir=0.25, cfr=0.15) %>%
-    addsteps(n=9, m=0.01, s=1,
-             cn=1, cp=2,
-             im=3, tE=5, tA=14,
-             tI=14, ir=0.25, cfr=0.15)
-plot(map)
+phase2 <- . %>%
+  move_uniform(m=0.01, s=1) %>%
+  meet(cn=2, cp=3, im=1) %>%
+  move_back()
+
+map <- run(map, phase2, days = 21, ir=1)
+plot(map)     
 ```
 
 

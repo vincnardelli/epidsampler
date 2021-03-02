@@ -6,8 +6,7 @@
 #'
 #' @return map
 #' @export
-#'
-#' @examples
+
 move_uniform <- function(map, m, s){
 
   can_move <- map$data[map$data$t == map$par$t, ]$id[map$data[map$data$t == map$par$t, ]$condition %in% c("S", "E", "A")]

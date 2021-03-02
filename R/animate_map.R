@@ -1,21 +1,22 @@
 #' Animate map
 #'
-#' @param map
-#' @param height
-#' @param width
-#' @param res
-#' @param fps
-#' @param spd
-#' @param end_pause
+#' @param map map object
+#' @param height height of the map
+#' @param width width of the map
+#' @param res resolution
+#' @param fps frame per second
+#' @param spd spd
+#' @param end_pause end_pause
+#' @param renderer gganimate renderer
 #'
-#' @return
+#' @return animation
 #' @export
-#'
-#' @examples
 animate_map <- function(map, height=800, width=800,
                         res = 150, fps = 10, spd = 2,
                         end_pause = 30,
                         renderer = gganimate::gifski_renderer() ){
+
+  t_move = condition = x = y = NULL
   # create continuous time with movements during day
   incr <- map$movements %>%
     dplyr::group_by(t) %>%

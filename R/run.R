@@ -1,19 +1,18 @@
 #' Run simulation
 #'
-#' @param map
-#' @param daily
-#' @param days
-#' @param tE
-#' @param tA
-#' @param tI
-#' @param ir
-#' @param cfr
-#' @param verbose
+#' @param map a map object
+#' @param daily steps of functions
+#' @param days number of days
+#' @param tE A positive integer. Number of days of E condition
+#' @param tA A positive integer. Number of days of A condition
+#' @param tI A positive integer. Number of days of I condition
+#' @param ir A positive float. Infected rate I/(A+I)
+#' @param cfr A positive float.case Fatality rate
+#' @param verbose A logical
 #'
-#' @return
+#' @return an epidmap object
 #' @export
-#'
-#' @examples
+
 run <- function(map, daily, days=1, tE=5, tA=14, tI=14, ir=1, cfr=0.15, verbose = F){
 
 
@@ -76,6 +75,6 @@ run <- function(map, daily, days=1, tE=5, tA=14, tI=14, ir=1, cfr=0.15, verbose 
     }
     # finish I
   }
-  cat("Simulation done! \n")
+  if(verbose) cat("Simulation done! \n")
   return(map)
 }

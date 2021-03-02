@@ -17,10 +17,26 @@ run(
 )
 }
 \arguments{
-\item{verbose}{}
+\item{map}{a map object}
+
+\item{daily}{steps of functions}
+
+\item{days}{number of days}
+
+\item{tE}{A positive integer. Number of days of E condition}
+
+\item{tA}{A positive integer. Number of days of A condition}
+
+\item{tI}{A positive integer. Number of days of I condition}
+
+\item{ir}{A positive float. Infected rate I/(A+I)}
+
+\item{cfr}{A positive float.case Fatality rate}
+
+\item{verbose}{A logical}
 }
 \value{
-
+an epidmap object
 }
 \description{
 Run simulation

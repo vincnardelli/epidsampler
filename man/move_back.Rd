@@ -7,10 +7,10 @@
 move_back(map)
 }
 \arguments{
-\item{map}{}
+\item{map}{a map object}
 }
 \value{
-
+a map object
 }
 \description{
 Move back

@@ -14,6 +14,8 @@ meet(map, cn, cp, im, parallel = F)
 \item{cp}{number of people in each contact}
 
 \item{im}{number of infected}
+
+\item{parallel}{parallel computation}
 }
 \value{
 a map object

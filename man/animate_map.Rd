@@ -16,10 +16,24 @@ animate_map(
 )
 }
 \arguments{
-\item{end_pause}{}
+\item{map}{map object}
+
+\item{height}{height of the map}
+
+\item{width}{width of the map}
+
+\item{res}{resolution}
+
+\item{fps}{frame per second}
+
+\item{spd}{spd}
+
+\item{end_pause}{end_pause}
+
+\item{renderer}{gganimate renderer}
 }
 \value{
-
+animation
 }
 \description{
 Animate map

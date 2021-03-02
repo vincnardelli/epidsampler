@@ -1,14 +1,14 @@
 #' Move to attraction
 #'
-#' @param map
-#' @param a
-#' @param m
+#' @param map a map object
+#' @param a a matrix
+#' @param m % of moving people
 #'
-#' @return
+#' @return map object
 #' @export
-#'
-#' @examples
+
 move_attraction <- function(map, a, m){
+  attraction = condition = t_move = x = y = NULL
   can_move <- map$data[map$data$t == map$par$t, ]$id[map$data[map$data$t == map$par$t, ]$condition %in% c("S", "E", "A")]
   n_can_move <- round(length(can_move)*m, 0)
 

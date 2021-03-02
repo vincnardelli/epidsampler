@@ -7,6 +7,7 @@
 #' @param verbose A logical
 #' @param P Total number of individuals
 #' @param rho Spatial autocorrelation parameter
+#' @param save_movements save movements in memory
 #'
 #' @return An epidmap object
 #' @export
@@ -23,7 +24,7 @@
 #' }
 #' @importFrom spdep cell2nb nb2mat
 
-genspmap <- function(n=5, P=1000, p=1, rho=0, verbose=T, save_movements=F){
+generate <- function(n=5, P=1000, p=1, rho=0, verbose=T, save_movements=F){
 
   # Generate grid
   nb <- spdep::cell2nb(n, n)

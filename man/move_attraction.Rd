@@ -7,10 +7,14 @@
 move_attraction(map, a, m)
 }
 \arguments{
-\item{m}{}
+\item{map}{a map object}
+
+\item{a}{a matrix}
+
+\item{m}{\% of moving people}
 }
 \value{
-
+map object
 }
 \description{
 Move to attraction

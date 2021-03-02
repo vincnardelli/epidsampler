@@ -4,11 +4,11 @@
 #' @param cn number of contacts in each cell
 #' @param cp number of people in each contact
 #' @param im number of infected
+#' @param parallel parallel computation
 #'
 #' @return a map object
 #' @export
-#'
-#' @examples
+
 meet <- function(map, cn, cp, im, parallel=F){
 
   cellmeet <- function(cell, cp){
@@ -20,7 +20,7 @@ meet <- function(map, cn, cp, im, parallel=F){
 
 
     cell_data <- map$data[map$data$x == x & map$data$y ==y  & map$data$t == map$par$t & map$data$condition %in% c("S", "E", "A", "R"),]
-    n_people_contact <- rpois(1, cp)
+    n_people_contact <- stats::rpois(1, cp)
 
     if(nrow(cell_data) > n_people_contact & nrow(cell_data) > 1){
       sampled <- sample(cell_data$id, n_people_contact)
@@ -61,7 +61,7 @@ meet <- function(map, cn, cp, im, parallel=F){
 
   # number of meeting for each cell
   # TODO cn depends on population
-  cns <- rep(1:(map$par$n*map$par$n), rpois(map$par$n*map$par$n, cn))
+  cns <- rep(1:(map$par$n*map$par$n), stats::rpois(map$par$n*map$par$n, cn))
   cns
 
   possible_meet <- purrr::possibly(cellmeet, otherwise = NULL)
