@@ -1,7 +1,7 @@
 library(epidsampler)
 # vignette example
 set.seed(12345)
-map <- generate(n=10, P=5000)
+map <- generate(n=25, P=1000, type="grid")
 print(map)
 phase1 <- . %>%
   move_uniform(m=0.2, s=3) %>%

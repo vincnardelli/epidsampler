@@ -24,17 +24,28 @@
 #' }
 #' @importFrom spdep cell2nb nb2mat
 
-generate <- function(n=5, P=1000, p=1, rho=0, verbose=T, save_movements=F){
+generate <- function(n=25, P=1000, type="polygon", p=1, rho=0, verbose=T, save_movements=F){
+
+
+  # Generate polygon
+  if(type == "polygon") {
+    map <-data.frame(x=round(runif(n, 0, 1), 2),
+                     y=round(runif(n, 0, 1), 2))
+    w <- as.matrix(1/dist(cbind(map$x, map$y), upper = T, diag = T))
+  }
+
 
   # Generate grid
-  nb <- spdep::cell2nb(n, n)
-  map <-  expand.grid(x=1:n, y=1:n)
-  w <- spdep::nb2mat(nb)
-  I<-diag(n*n)
+  if(type == "grid") {
+    sqrt(n) == round(sqrt(n), 0) #check if is squared
 
+    map <-  expand.grid(x=1:sqrt(n), y=1:sqrt(n))
+    nb <- spdep::cell2nb(sqrt(n), sqrt(n))
+    w <- spdep::nb2mat(nb)
+  }
 
-  # Generate people
-  map$p <- runif(n*n, 1-p, 1)
+  I <- diag(n)
+  map$p <- runif(n, 1-p, 1)
   map$p <- solve(I-rho*w)%*%(map$p)
 
   # Fix round
@@ -64,7 +75,10 @@ generate <- function(n=5, P=1000, p=1, rho=0, verbose=T, save_movements=F){
 
 
   out <- list(map=map, data=data, contacts=contacts, movements=NULL, par=par)
-  class(out) <- "epidmap"
+
+  if(type == "polygon") class(out) <- c("epidmap", "polygon")
+  if(type == "grid") class(out) <- c("epidmap", "grid")
+
   return(out)
 
 }

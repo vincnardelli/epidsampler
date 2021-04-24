@@ -20,9 +20,9 @@ move_uniform <- function(map, m, s){
 
   check_border <- function(list){
     list[list < 1] <- 1 - list[list < 1]
-    list[list > map$par$n] <- map$par$n - (list[list > map$par$n] - map$par$n)
+    list[list > sqrt(map$par$n)] <-sqrt(map$par$n) - (list[list >sqrt(map$par$n)] -sqrt(map$par$n))
     list[list < 1] <- 1
-    list[list > map$par$n] <- map$par$n
+    list[list >sqrt(map$par$n)] <-sqrt(map$par$n)
 
     return(list)
   }

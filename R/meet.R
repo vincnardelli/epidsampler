@@ -61,7 +61,7 @@ meet <- function(map, cn, cp, im, parallel=F){
 
   # number of meeting for each cell
   # TODO cn depends on population
-  cns <- rep(1:(map$par$n*map$par$n), stats::rpois(map$par$n*map$par$n, cn))
+  cns <- rep(1:(map$par$n), stats::rpois(map$par$n, cn))
   cns
 
   possible_meet <- purrr::possibly(cellmeet, otherwise = NULL)
