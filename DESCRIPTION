@@ -41,4 +41,7 @@ Imports:
     stats
 Suggests: 
     testthat,
-    utils
+    utils,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

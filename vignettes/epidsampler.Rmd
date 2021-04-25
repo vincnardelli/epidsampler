@@ -20,12 +20,12 @@ knitr::opts_chunk$set(
 library(epidsampler)
 ```
 
-The simulation is divided in two main function. We generate the regular squared lattice grid and the individuals using genmap(). Then, for each day of the simulation (referred as "step"), we simulate the mobility, social interaction and the evolution of the epidemics with the infection and evolution of the disease for each individual in the map.
+The simulation is divided in two main function. We generate the regular squared lattice grid and the individuals using generate(). Then, for each day of the simulation, we simulate the mobility, social interaction and the evolution of the epidemics with the infection and evolution of the disease for each individual in the map.
 
 # Map generation
 ```{r}
 set.seed(12345)
-map <- generate(n=5, P=1000)
+map <- generate(n=25, P=1000, type="grid")
 print(map)
 ```
 #### Parameters:
