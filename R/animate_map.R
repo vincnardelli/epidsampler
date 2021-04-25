@@ -16,6 +16,7 @@ animate_map <- function(map, height=800, width=800,
                         end_pause = 30,
                         renderer = gganimate::gifski_renderer() ){
 
+  . = NULL
   t_move = condition = x = y = NULL
   # create continuous time with movements during day
   incr <- map$movements %>%
@@ -33,13 +34,13 @@ animate_map <- function(map, height=800, width=800,
     dplyr::select(-t_move, -incr)
 
 
-  if(is(map, "grid")){
+  if(methods::is(map, "grid")){
   plot <- animation %>%
     dplyr::filter(condition != "D") %>%
     ggplot2::ggplot()
   }
 
-  if(is(map, "polygon")){
+  if(methods::is(map, "polygon")){
   voronoi_grid <- map$map %>%
     sf::st_as_sf(coords = c("x", "y")) %>%
     sf::st_geometry() %>%

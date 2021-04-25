@@ -19,6 +19,8 @@ generate(
 
 \item{P}{Total number of individuals}
 
+\item{type}{select type}
+
 \item{p}{A positive integer. People density for each tile - min/max - uniform distribution}
 
 \item{rho}{Spatial autocorrelation parameter}

@@ -1,5 +1,5 @@
 set.seed(1234)
-map <- generate(n=4, P=100, save_movements = TRUE)
+map <- generate(n=4, P=100, save_movements = TRUE, type = "grid")
 phase1 <- . %>%
   move_uniform(m=0.2, s=3) %>%
   meet(cn=3, cp=4, im=2) %>%

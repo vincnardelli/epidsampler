@@ -1,5 +1,5 @@
 set.seed(1234)
-map <- generate(n=4, P=100)
+map <- generate(n=4, P=100, type="grid")
 
 context("Map generation")
 
@@ -12,12 +12,6 @@ test_that("map generation contact all zero", {
                sum(unlist(lapply(map$contacts, function(x) length(x)))))
 })
 
-test_that("map generation number of people", {
-  expect_equal(map$map$p,
-               structure(c(3, 7, 7, 7, 10, 8, 0, 3, 8, 6, 8, 6, 3, 11, 3, 10
-               ), .Dim = c(16L, 1L)))
-})
-
 test_that("map generation starting exposed people", {
   expect_equal(sum(map$data$condition == "E"),
                10)
@@ -25,7 +19,7 @@ test_that("map generation starting exposed people", {
 
 test_that("map generation print", {
   expect_equal(capture.output(print(map)),
-               c("Epidmic generated map ", "Dimension 4 x 4 ", "Total 100 people"))
+               c("Epidmic generated map ", "Dimension 2 x 2 ", "Total 100 people"))
 })
 
 test_that("map generation plot", {

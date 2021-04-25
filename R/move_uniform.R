@@ -6,9 +6,10 @@
 #'
 #' @return map
 #' @export
+#' @importFrom methods is
 
 move_uniform <- function(map, m, s){
-
+condition = NULL
   # polygon uniform
   if(is(map, "polygon")){
 

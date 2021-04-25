@@ -21,8 +21,7 @@ Authors@R:
              role = "ctb"))
 Description: Simulate an epidemic map with mobility and social
     interaction between individuals. Useful for testing sampling methods.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+License: LGPL (>= 3)
 URL: https://github.com/vincnardelli/epidsampler
 Encoding: UTF-8
 LazyData: true
@@ -36,7 +35,10 @@ Imports:
     purrr,
     parallel,
     progress,
-    gganimate
+    gganimate,
+    sf,
+    methods,
+    stats
 Suggests: 
     testthat,
     utils

@@ -8,6 +8,7 @@
 #' @param P Total number of individuals
 #' @param rho Spatial autocorrelation parameter
 #' @param save_movements save movements in memory
+#' @param type select type
 #'
 #' @return An epidmap object
 #' @export
@@ -23,6 +24,7 @@
 #' print(map)
 #' }
 #' @importFrom spdep cell2nb nb2mat
+#' @importFrom stats dist
 
 generate <- function(n=25, P=1000, type="polygon", p=1, rho=0, verbose=T, save_movements=F){
 
@@ -31,7 +33,7 @@ generate <- function(n=25, P=1000, type="polygon", p=1, rho=0, verbose=T, save_m
   if(type == "polygon") {
     map <-data.frame(x=round(runif(n, 0.05, 0.95), 2),
                      y=round(runif(n, 0.05, 0.95), 2))
-    w <- as.matrix(1/dist(cbind(map$x, map$y), upper = T, diag = T))
+    w <- as.matrix(1/stats::dist(cbind(map$x, map$y), upper = T, diag = T))
   }
 
 
