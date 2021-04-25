@@ -4,14 +4,14 @@
 \alias{move_attraction}
 \title{Move to attraction}
 \usage{
-move_attraction(map, a, m)
+move_attraction(map, m, a = NULL)
 }
 \arguments{
 \item{map}{a map object}
 
-\item{a}{a matrix}
-
 \item{m}{\% of moving people}
+
+\item{a}{a matrix}
 }
 \value{
 map object

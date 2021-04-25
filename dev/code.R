@@ -20,13 +20,31 @@ plot(map)
 set.seed(12345)
 map <- generate(n=7, P=200, type="polygon", save_movements = T)
 phase1 <- . %>%
-  move_uniform(m=0.1, s=5)
+  move_attraction(m=0.05, a=100) %>%
+  move_back()
 
-map <- run(map, phase1, days = 5, tE=5, tA=14,
+map <- run(map, phase1, days = 3, tE=5, tA=14,
            tI=14, ir=1, cfr=0.15)
 
+
+
+# test attraction ---
+
+map <- generate(n=16, P=200, type="grid", save_movements = T)
 phase2 <- . %>%
-  move_uniform(m=0.01, s=1)
+  move_attraction(m=0.1)
+
+map <- run(map, phase2, days = 5, tE=5, tA=14,
+           tI=14, ir=1, cfr=0.15)
+
+
+animate_map(map)
+
+
+# Move attraction custom ---
+map <- generate(n=7, P=200, type="polygon", save_movements = T)
+phase2 <- . %>%
+  move_attraction(m=0.1, a=a)
 
 map <- run(map, phase2, days = 5, tE=5, tA=14,
            tI=14, ir=1, cfr=0.15)
