@@ -9,26 +9,59 @@
 
 move_uniform <- function(map, m, s){
 
-  can_move <- map$data[map$data$t == map$par$t, ]$id[map$data[map$data$t == map$par$t, ]$condition %in% c("S", "E", "A")]
-  n_can_move <- round(length(can_move)*m, 0)
+  # polygon uniform
+  if(is(map, "polygon")){
+
+    move_df <- map$data %>%
+      dplyr::filter(t == map$par$t) %>%
+      dplyr::mutate(can_move = ifelse(condition %in% c("S", "E", "A"), TRUE, FALSE)) %>%
+      dplyr::left_join(map$map, by=c("x", "y"))
+
+    can_move <- move_df$id[move_df$can_move]
+    n_can_move <- round(length(can_move)*m, 0)
+    move_p <- sample(can_move, n_can_move)
+
+    knn_mat <- spdep::nb2mat(spdep::knn2nb(spdep::knearneigh(cbind(map$map$x, map$map$y), s)), style="B")
+    w_std <- t(apply(map$w, 1, function(x) x/sum(x)))
+    w <- knn_mat * w_std
 
 
-  move_p <- sample(can_move, n_can_move)
+    can_move_df <- move_df[move_df$id %in% move_p,]
 
-  move_x <- round(runif(n_can_move, min=-s, max=s), 0)
-  move_y <- round(runif(n_can_move, min=-s, max=s), 0)
+    can_move_id <- can_move_df$id
+    can_move_location <- can_move_df$location_id
 
-  check_border <- function(list){
-    list[list < 1] <- 1 - list[list < 1]
-    list[list > sqrt(map$par$n)] <-sqrt(map$par$n) - (list[list >sqrt(map$par$n)] -sqrt(map$par$n))
-    list[list < 1] <- 1
-    list[list >sqrt(map$par$n)] <-sqrt(map$par$n)
+    relocate <- function(x) sample(map$par$n, 1, prob=w[x, ])
 
-    return(list)
+    new_location <- sapply(can_move_location, relocate)
+
+    map$data[map$data$t == map$par$t, ][move_p,]$x <- sapply(new_location, function(location) map$map$x[map$map$location_id == location])
+    map$data[map$data$t == map$par$t, ][move_p,]$y <- sapply(new_location, function(location) map$map$y[map$map$location_id == location])
   }
 
-  map$data[map$data$t == map$par$t, ][move_p,]$x <- check_border(map$data[map$data$t == map$par$t, ][move_p, ]$x + move_x)
-  map$data[map$data$t == map$par$t, ][move_p,]$y <- check_border(map$data[map$data$t == map$par$t, ][move_p, ]$y + move_y)
+  #grid - uniform
+  if(is(map, "grid")){
+    can_move <- map$data[map$data$t == map$par$t, ]$id[map$data[map$data$t == map$par$t, ]$condition %in% c("S", "E", "A")]
+    n_can_move <- round(length(can_move)*m, 0)
+    move_p <- sample(can_move, n_can_move)
+
+    move_x <- round(runif(n_can_move, min=-s, max=s), 0)
+    move_y <- round(runif(n_can_move, min=-s, max=s), 0)
+
+    check_border <- function(list){
+      list[list < 1] <- 1 - list[list < 1]
+      list[list > sqrt(map$par$n)] <-sqrt(map$par$n) - (list[list >sqrt(map$par$n)] -sqrt(map$par$n))
+      list[list < 1] <- 1
+      list[list >sqrt(map$par$n)] <-sqrt(map$par$n)
+
+      return(list)
+    }
+
+    map$data[map$data$t == map$par$t, ][move_p,]$x <- check_border(map$data[map$data$t == map$par$t, ][move_p, ]$x + move_x)
+    map$data[map$data$t == map$par$t, ][move_p,]$y <- check_border(map$data[map$data$t == map$par$t, ][move_p, ]$y + move_y)
+
+  }
+
 
   if(map$par$save_movements){
     df_tosave <- map$data[map$data$t == map$par$t, ]

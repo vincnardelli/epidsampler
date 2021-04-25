@@ -32,10 +32,32 @@ animate_map <- function(map, height=800, width=800,
     dplyr::arrange(t) %>%
     dplyr::select(-t_move, -incr)
 
+
+  if(is(map, "grid")){
+  plot <- animation %>%
+    dplyr::filter(condition != "D") %>%
+    ggplot2::ggplot()
+  }
+
+  if(is(map, "polygon")){
+  voronoi_grid <- map$map %>%
+    sf::st_as_sf(coords = c("x", "y")) %>%
+    sf::st_geometry() %>%
+    do.call(c, .) %>%
+    sf::st_voronoi(bOnlyEdges=FALSE) %>%
+    sf::st_collection_extract() %>%
+    sf::st_crop(c(xmin = 0, ymin = 0, xmax = 1, ymax = 1))
+
+
   plot <- animation %>%
     dplyr::filter(condition != "D") %>%
     ggplot2::ggplot() +
-    ggplot2::geom_jitter(data=animation, ggplot2::aes(x, y, color=condition), width = 0.1, height = 0.1) +
+    ggplot2::geom_sf(data=voronoi_grid, fill=NA)
+
+  }
+
+  plot <- plot +
+    ggplot2::geom_jitter(data=animation, ggplot2::aes(x, y, color=condition), width = 0.03, height = 0.03, size=0.5) +
     ggplot2:: scale_color_manual(values=c( "S"="blue","D"='black', "I"= 'red4', 'E'="red", 'R'='darkolivegreen4', "A"="orange")) +
     ggplot2::theme_void() +
     gganimate::transition_time(t) +

@@ -21,24 +21,22 @@ Authors@R:
              role = "ctb"))
 Description: Simulate an epidemic map with mobility and social
     interaction between individuals. Useful for testing sampling methods.
-License: LGPL (>= 2.1)
+License: `use_mit_license()`, `use_gpl3_license()` or friends to
+    pick a license
 URL: https://github.com/vincnardelli/epidsampler
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
+    magrittr,
     dplyr,
     ggplot2,
     spdep,
     purrr,
-    magrittr,
     parallel,
     progress,
     gganimate
 Suggests: 
     testthat,
-    utils,
-    knitr,
-    rmarkdown
-VignetteBuilder: knitr
+    utils

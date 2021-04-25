@@ -35,17 +35,17 @@ plot.epidmap <- function(x, ...){
     summarise(count=n())
 
 
-    p <- ggplot(df) +
-    geom_line(aes(t, count, color=condition)) +
-    theme_minimal() +
-    scale_y_continuous(trans='log2') +
-    scale_color_manual(values=c( "S"="blue","D"='black', "I"= 'red4', 'E'="red", 'R'='darkolivegreen4', "A"="orange")) +
+    p <- ggplot2::ggplot(df) +
+      ggplot2::geom_line(aes(t, count, color=condition)) +
+      ggplot2::theme_minimal() +
+      ggplot2::scale_y_continuous(trans='log2') +
+      ggplot2::scale_color_manual(values=c( "S"="blue","D"='black', "I"= 'red4', 'E'="red", 'R'='darkolivegreen4', "A"="orange")) +
     # FIXME add geom text in plot
     # geom_text(data = df %>% ungroup() %>% filter(t == max(t)), aes(label = condition,
     #                                                              x = t + 1,
     #                                                              y = count,
     #                                                              color = condition)) +
-    ggtitle("SEIRD graph")
+      ggplot2::ggtitle("SEIRD graph")
 
   return(p)
 }
