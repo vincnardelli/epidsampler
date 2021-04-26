@@ -1,8 +1,11 @@
 #' Move back
 #'
-#' @param map a map object
+#' @description
+#' 'move_back' generates the movements to restore the original position of the individuals
+#' after some movements
+#' @param map an epidmap object
 #'
-#' @return a map object
+#' @return an epidmap object
 #' @export
 
 move_back <- function(map){

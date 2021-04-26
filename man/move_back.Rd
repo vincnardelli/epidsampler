@@ -7,11 +7,12 @@
 move_back(map)
 }
 \arguments{
-\item{map}{a map object}
+\item{map}{an epidmap object}
 }
 \value{
-a map object
+an epidmap object
 }
 \description{
-Move back
+'move_back' generates the movements to restore the original position of the individuals
+after some movements
 }

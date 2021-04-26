@@ -17,21 +17,3 @@ plot
 \description{
 Plot epidmap
 }
-\examples{
-\dontrun{
-set.seed(12345)
-map <- genmap(n=5, p=c(10, 50))
-map <- map \%>\%
- addsteps(n=7*3, m=0.03, s=2,
-          cn=4, cp=2,
-          im=3, tE=5, tA=14,
-          tI=14, ir=1, cfr=0.15) \%>\%
- addsteps(n=19, m=0.01, s=1,
-          cn=1, cp=2,
-          im=3, tE=5, tA=14,
-          tI=14, ir=1, cfr=0.15)
-plot(map)
-}
-
-
-}

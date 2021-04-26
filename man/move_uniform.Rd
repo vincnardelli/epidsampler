@@ -7,15 +7,35 @@
 move_uniform(map, m, s)
 }
 \arguments{
-\item{map}{map object}
+\item{map}{an epidmap object}
 
-\item{m}{\% of moving people}
+\item{m}{\% of moving individuals}
 
-\item{s}{max step}
+\item{s}{max step size (grid map) or number of neighbor clusters (polygon map). See details.}
 }
 \value{
-map
+an epidmap object
 }
 \description{
-Move uniform
+'move_uniform' generates the movements of the individuals
+}
+\details{
+The contagion mechanism is favoured by people mobility.
+In this simulation, we assumed that in any moment of time a certain
+percentage \strong{m} of the population can move between the spatial clusters.
+In this way it is possible to distinguish different epidemic phases
+such as free-to-move period and lockdown.
+The commuting during the lockdown period is not only limited
+by the number of people who move, but also by the extent of their movements.
+\subsection{Grid map}{
+
+In the case of grid map, the parameter \strong{s} rules the max step size between the
+tiles of the grid.
+}
+
+\subsection{Polygon map}{
+
+In the case of the polygon map, the parameter \strong{s} rules the number
+of neighbor clusters in which each individual can move.
+}
 }

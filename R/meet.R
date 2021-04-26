@@ -1,13 +1,27 @@
 #' Meet
 #'
-#' @param map a map object
-#' @param cn number of contacts in each cell
-#' @param cp number of people in each contact
-#' @param im number of infected
-#' @param parallel parallel computation
+#' @description
+#' 'meet' generates the social interaction and the contact opportunities
 #'
-#' @return a map object
+#' @details
+#' The contagion is determined by the social interaction
+#' and the contact opportunities. The number of contacts in each spatial cluster is assumed to
+#' be determined by a random number drawn from a Poisson distribution with parameter,
+#' say **cn**, while the number of people involved in the movements
+#' is also a Poisson number characterized but a different parameter **cp**.
+#' Given these assumptions, a contagion occurs in the following way.
+#' If in a meeting it is present at least one asymptomatic or an exposed person,
+#' **im** susceptibles will be infected moving in the status of the Exposed.
+#'
+#' @param map an epidmap object
+#' @param cn Integer. Mean of contacts inside a spatial cluster
+#' @param cp Integer. Mean of number of people for each contact
+#' @param im Integer. Mean of number of people infected
+#' @param parallel Boolean. Parallel computation
+#'
+#' @return an epidmap object
 #' @export
+#'
 
 meet <- function(map, cn, cp, im, parallel=F){
 

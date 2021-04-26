@@ -7,19 +7,29 @@
 meet(map, cn, cp, im, parallel = F)
 }
 \arguments{
-\item{map}{a map object}
+\item{map}{an epidmap object}
 
-\item{cn}{number of contacts in each cell}
+\item{cn}{Integer. Mean of contacts inside a spatial cluster}
 
-\item{cp}{number of people in each contact}
+\item{cp}{Integer. Mean of number of people for each contact}
 
-\item{im}{number of infected}
+\item{im}{Integer. Mean of number of people infected}
 
-\item{parallel}{parallel computation}
+\item{parallel}{Boolean. Parallel computation}
 }
 \value{
-a map object
+an epidmap object
 }
 \description{
-Meet
+'meet' generates the social interaction and the contact opportunities
+}
+\details{
+The contagion is determined by the social interaction
+and the contact opportunities. The number of contacts in each spatial cluster is assumed to
+be determined by a random number drawn from a Poisson distribution with parameter,
+say \strong{cn}, while the number of people involved in the movements
+is also a Poisson number characterized but a different parameter \strong{cp}.
+Given these assumptions, a contagion occurs in the following way.
+If in a meeting it is present at least one asymptomatic or an exposed person,
+\strong{im} susceptibles will be infected moving in the status of the Exposed.
 }

@@ -58,7 +58,7 @@ usethis::use_git()
 usethis::use_travis()
 usethis::use_coverage()
 usethis::use_lifecycle_badge("experimental")
-usethis::use_github_action_check_standard()
+usethis::use_github_action_check_standard(save_as="test.yaml")
 usethis::use_github_action("test-coverage")
 
 # Website

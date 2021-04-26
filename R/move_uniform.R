@@ -1,10 +1,30 @@
 #' Move uniform
 #'
-#' @param map map object
-#' @param m % of moving people
-#' @param s max step
+#' @description
+#' 'move_uniform' generates the movements of the individuals
 #'
-#' @return map
+#' @details
+#' The contagion mechanism is favoured by people mobility.
+#' In this simulation, we assumed that in any moment of time a certain
+#' percentage **m** of the population can move between the spatial clusters.
+#' In this way it is possible to distinguish different epidemic phases
+#' such as free-to-move period and lockdown.
+#' The commuting during the lockdown period is not only limited
+#' by the number of people who move, but also by the extent of their movements.
+#'
+#' ## Grid map
+#' In the case of grid map, the parameter **s** rules the max step size between the
+#' tiles of the grid.
+#'
+#' ## Polygon map
+#' In the case of the polygon map, the parameter **s** rules the number
+#'  of neighbor clusters in which each individual can move.
+#'
+#' @param map an epidmap object
+#' @param m % of moving individuals
+#' @param s max step size (grid map) or number of neighbor clusters (polygon map). See details.
+#'
+#' @return an epidmap object
 #' @export
 #' @importFrom methods is
 
