@@ -65,3 +65,7 @@ usethis::use_github_action("test-coverage")
 usethis::use_pkgdown()
 pkgdown::build_site()
 usethis::use_github_action("pkgdown")
+
+
+# style package (dev folder excluded)
+styler::style_pkg()
