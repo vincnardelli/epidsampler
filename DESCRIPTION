@@ -26,6 +26,7 @@ Description: Simulate an epidemic map with mobility and social
     interaction between individuals. Useful for testing sampling methods.
 License: LGPL (>= 3)
 URL: https://github.com/vincnardelli/epidsampler
+BugReports: https://github.com/vincnardelli/epidsampler/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
