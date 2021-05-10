@@ -4,15 +4,18 @@ Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Vincenzo",
              family = "Nardelli",
-             role = c("cre", "aut"),
-             email = "vincnardelli@gmail.com"),
+             role = c("cre", "aut", "cph"),
+             email = "vincnardelli@gmail.com",
+             comment = c(ORCID = "0000-0002-7215-7934")),
       person(given = "Giorgio",
              family = "Alleva",
-             role = "ctb"),
+             role = "ctb",
+             comment = c(ORCID = "0000-0002-3910-3029")),
       person(given = "Giuseppe",
              family = "Arbia",
              role = "ctb",
-             email = "giuseppearbia13@gmail.com"),
+             email = "giuseppearbia13@gmail.com",
+             comment = c(ORCID = "0000-0001-5173-3931")),
       person(given = "Piero Demetrio",
              family = "Falorsi",
              role = "ctb"),
@@ -23,24 +26,25 @@ Description: Simulate an epidemic map with mobility and social
     interaction between individuals. Useful for testing sampling methods.
 License: LGPL (>= 3)
 URL: https://github.com/vincnardelli/epidsampler
+BugReports: https://github.com/vincnardelli/epidsampler/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
     magrittr,
-    dplyr,
-    ggplot2,
+    dplyr (>= 1.0.5),
+    ggplot2 (>= 3.3.2),
     spdep,
-    purrr,
+    purrr (>= 0.3.4),
     parallel,
     progress,
-    gganimate,
-    sf,
+    gganimate (>= 1.0.7),
+    sf (>= 0.9.6),
     methods,
     stats
 Suggests: 
-    testthat,
+    testthat (>= 3.0.2),
     utils,
     knitr,
     rmarkdown,
