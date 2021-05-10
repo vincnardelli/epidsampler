@@ -37,7 +37,7 @@ usethis::use_vignette(name="epidsampler")
 
 
 # Read me
-usethis::use_readme_md( open = FALSE )
+usethis::use_readme_rmd( open = FALSE )
 
 
 # Test that
