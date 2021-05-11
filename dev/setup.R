@@ -69,3 +69,7 @@ usethis::use_github_action("pkgdown")
 
 # style package (dev folder excluded)
 styler::style_pkg()
+usethis::use_tidy_support()
+usethis::use_tidy_coc()
+usethis::use_tidy_issue_template()
+usethis::use_tidy_contributing()
