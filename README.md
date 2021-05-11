@@ -114,3 +114,10 @@ the map generation and the simulation in the vignette.</a>
 International Consultant
 
 **Alberto Zuliani** - Emeritus Professor, Sapienza University of Rome
+
+## Code of Conduct
+
+Please note that the epidsampler project is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
